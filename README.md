@@ -1,70 +1,69 @@
-#  Ruby Book Collection Manager
-A simple command-line application for managing personal book collections using Ruby.
+# Ruby Book Collection Manager
 
+A command-line application for managing personal book collections using Ruby.
 
- # Overview
+---
 
-The Ruby Book Collection Manager is a command-line application designed to help users organise and manage a personal collection of books. The system allows users to store, retrieve, and manage book records efficiently using a simple menu-driven interface.
+## Overview
 
- # Features
+The Ruby Book Collection Manager is a simple CLI application that allows users to organise and manage a personal collection of books. The system provides functionality to store, retrieve, and manage book records through a structured menu-driven interface.
 
-Add a new book
+---
 
-View all books
+## Features
 
-Search for a book (by title or author)
+- Add a new book  
+- View all books  
+- Search for a book (by title or author)  
+- Delete a book  
+- Store structured book information  
 
-Delete a book
+---
 
-Store structured book information
+## Book Structure
 
- # Book Structure
+Each book record contains the following fields:
 
-Each book contains the following fields:
+### Required
+- Title  
+- Author  
+- Genre  
 
-Required:
+### Optional
+- Year  
+- Description  
 
-Title
+---
 
-Author
+## Technologies Used
 
-Genre
+- Ruby 3.4.8  
+- Visual Studio Code  
+- Git and GitHub  
 
-Optional:
+---
 
-Year
+## How to Run
 
- # Description
+1. Open the project folder in Visual Studio Code  
+2. Open the integrated terminal  
+3. Run the program:
 
- Technologies Used
-
-Ruby 3.4.8
-
-Visual Studio Code
-
-Git & GitHub
-
- # How to Run the Application
-
-Open the project folder in VS Code
-
-Open the terminal
-
-Run the program:
-
-``
-
+```bash
 ruby main.rb
 
-``
-
-
+```
 # System Design
 
-The application follows a modular structure:
+The application follows a modular design:
 
 A Book component represents individual book records
 
-A management component handles operations such as adding, searching, and deleting books
+A BookManager handles operations such as adding, searching, viewing, and deleting books
 
-A menu-driven interface allows user interaction through the command line
+A menu-driven interface allows user interaction via the command line
+
+
+# Repository
+
+https://github.com/wilsonmugwe/ruby-book-manager
