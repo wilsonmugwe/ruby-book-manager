@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard - Book Manager</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="dashboard-page">
+  <div class="dashboard-shell">
+
+    <header class="top-bar">
+      <div>
+        <h1>Ruby Book Collection Manager</h1>
+        <p class="subtitle">Manage, search, filter and organise your personal book collection.</p>
+      </div>
+
+      <div class="user-pill">
+        <span>Logged in as</span>
+        <strong><%= @role.upcase %></strong>
+        <a href="/logout">Logout</a>
+      </div>
+    </header>
+
+    <% if @message %>
+      <div class="message-box"><%= @message %></div>
+    <% end %>
+
+    <main class="dashboard-grid">
+
+      <section class="panel large-panel">
+        <h2>Add Book</h2>
+
+        <form action="/add" method="post" class="book-form">
+          <input type="text" name="title" placeholder="Book title">
+          <input type="text" name="author" placeholder="Author">
+          <input type="text" name="genre" placeholder="Genre">
+          <input type="text" name="year" placeholder="Year">
+          <button type="submit">Add Book</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Search</h2>
+
+        <form action="/search" method="post">
+          <input type="text" name="keyword" placeholder="Search title, author, or genre">
+          <button type="submit">Search</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Filter by Genre</h2>
+
+        <form action="/filter" method="post">
+          <input type="text" name="genre" placeholder="Enter genre">
+          <button type="submit">Filter</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Sort Books</h2>
+
+        <div class="button-row">
+          <form action="/sort/title" method="post">
+            <button type="submit">Sort by Title</button>
+          </form>
+
+          <form action="/sort/year" method="post">
+            <button type="submit">Sort by Year</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+
+    <section class="panel table-panel">
+      <div class="section-heading">
+        <h2>Book Collection</h2>
+        <p><%= @books.length %> book(s) currently displayed</p>
+      </div>
+
+      <% if @books.empty? %>
+        <div class="empty-state">No books found.</div>
+      <% else %>
+        <table>
+          <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Year</th>
+            <% if @role == "admin" %>
+              <th>Action</th>
+            <% end %>
+          </tr>
+
+          <% @books.each_with_index do |book, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= book.title %></td>
+              <td><%= book.author %></td>
+              <td><%= book.genre %></td>
+              <td><%= book.year %></td>
+
+              <% if @role == "admin" %>
+                <td>
+                  <form action="/delete/<%= index %>" method="post">
+                    <button class="danger-btn" type="submit">Delete</button>
+                  </form>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+    </section>
+
+  </div>
+</body>
+</html>

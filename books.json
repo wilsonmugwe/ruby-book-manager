@@ -4,5 +4,23 @@
     "author": "Richard Kiyosaki",
     "genre": "Finance",
     "year": "1997"
+  },
+  {
+    "title": "The 48 Laws of Power",
+    "author": "Robert Greene",
+    "genre": "Strategy",
+    "year": "1998"
+  },
+  {
+    "title": "The Psychology of Money",
+    "author": "Morgan Housel",
+    "genre": "Finance",
+    "year": "2020"
+  },
+  {
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "genre": "Fiction",
+    "year": "1988"
   }
 ]
