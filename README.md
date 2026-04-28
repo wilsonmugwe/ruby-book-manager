@@ -2,13 +2,12 @@
 
 A command-line application for managing personal book collections using Ruby.
 
----
 
 ## Overview
 
 The Ruby Book Collection Manager is a simple CLI application that allows users to organise and manage a personal collection of books. The system provides functionality to store, retrieve, and manage book records through a structured menu-driven interface.
 
----
+
 
 ## Features
 
@@ -18,7 +17,7 @@ The Ruby Book Collection Manager is a simple CLI application that allows users t
 - Delete a book  
 - Store structured book information  
 
----
+
 
 ## Book Structure
 
@@ -33,7 +32,7 @@ Each book record contains the following fields:
 - Year  
 - Description  
 
----
+
 
 ## Technologies Used
 
@@ -41,7 +40,7 @@ Each book record contains the following fields:
 - Visual Studio Code  
 - Git and GitHub  
 
----
+
 
 ## How to Run
 
