@@ -6,33 +6,49 @@
 </head>
 
 <body class="login-page">
-  <div class="login-card">
-    <h1>Book Collection Manager</h1>
-    <p class="subtitle">Manage your book collection using Ruby.</p>
 
-    <% if @error %>
-      <p class="error-message"><%= @error %></p>
-    <% end %>
+  <section class="hero-container">
 
-    <% if @success %>
-      <p class="success-message"><%= @success %></p>
-    <% end %>
-
-    <form action="/login" method="post">
-      <label>Username</label>
-      <input type="text" name="username" placeholder="Enter username">
-
-      <label>Password</label>
-      <input type="password" name="password" placeholder="Enter password">
-
-      <button type="submit">Sign In</button>
-    </form>
-
-    <div class="auth-links">
-      <a href="/signup">Create Account</a>
-      <span>|</span>
-      <a href="/forgot">Forgot Password?</a>
+    <div class="hero-left">
+      <h1>Book Collection Manager</h1>
+      <p>
+        Manage your book collection using Ruby. Add, search, filter, sort and organise
+        your personal library through a simple web-based system.
+      </p>
     </div>
-  </div>
+
+    <div class="hero-right">
+      <div class="login-card">
+        <h2>Sign In</h2>
+        <p class="subtitle">Access your Ruby book collection dashboard.</p>
+
+        <% if @error %>
+          <p class="error-message"><%= @error %></p>
+        <% end %>
+
+        <% if @success %>
+          <p class="success-message"><%= @success %></p>
+        <% end %>
+
+        <form action="/login" method="post">
+          <label>Username</label>
+          <input type="text" name="username" placeholder="Enter username">
+
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter password">
+
+          <button type="submit">Sign In</button>
+        </form>
+
+        <div class="auth-links">
+          <a href="/signup">Create Account</a>
+          <span>|</span>
+          <a href="/forgot">Forgot Password?</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
 </body>
 </html>
