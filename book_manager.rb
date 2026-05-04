@@ -19,18 +19,29 @@ class BookManager
     @books
   end
 
-  def search_books(keyword)
+  def books_for_user(username)
     @books.select do |book|
-      book.title.downcase.include?(keyword.downcase) ||
-      book.author.downcase.include?(keyword.downcase) ||
-      book.genre.downcase.include?(keyword.downcase)
+      book.owner == username
     end
   end
 
-  def delete_book(index)
-    return false if index < 0 || index >= @books.length
+  def search_books(keyword, username)
+    keyword = keyword.to_s.downcase
 
-    @books.delete_at(index)
+    books_for_user(username).select do |book|
+      book.title.downcase.include?(keyword) ||
+        book.author.downcase.include?(keyword) ||
+        book.genre.downcase.include?(keyword)
+    end
+  end
+
+  def delete_user_book(index, username)
+    user_books = books_for_user(username)
+    book_to_delete = user_books[index]
+
+    return false unless book_to_delete
+
+    @books.delete(book_to_delete)
     save_books
     true
   end

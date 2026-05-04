@@ -10,7 +10,6 @@ body {
 }
 
 h1, h2 {
-  font-style: italic;
   color: #fff;
 }
 
@@ -30,38 +29,42 @@ a:hover {
 ========================= */
 
 .login-page {
-  min-height: 100vh;
+  height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(37, 99, 235, 0.30), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.95), transparent 45%),
-    linear-gradient(135deg, #000000, #020617 50%, #0f172a);
-  padding: 45px 80px;
+    radial-gradient(circle at top left, rgba(3, 51, 106, 0.55), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.30), transparent 40%),
+    linear-gradient(135deg, #dbeafe 0%, #042852 35%, #014fad 100%);
+  padding: 25px 70px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .hero-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1450px;
+  margin-top: 10px;
 }
 
 .hero-left {
-  margin-bottom: 28px;
+  margin-bottom: 18px;
 }
 
 .hero-left h1 {
   font-size: 50px;
-  margin: 0 0 22px;
+  margin: 0 0 10px;
+  font-style: normal;
+  color: #ebedf0;
 }
 
 .hero-left p {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 22px;
+  font-size: 21px;
   font-style: italic;
-  line-height: 1.6;
-  color: #dbeafe;
+  line-height: 1.35;
+  color: #e9ecf2;
   margin: 0;
+  max-width: 1350px;
 }
 
 .hero-right {
@@ -70,90 +73,82 @@ a:hover {
 
 .login-card {
   width: 100%;
-  background: rgba(15, 23, 42, 0.78);
-  border: 1px solid rgba(147, 197, 253, 0.22);
+  max-width: 720px;
+  min-height: 340px;
+  background: rgba(15, 42, 91, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 26px;
-  padding: 48px;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+  padding: 32px 40px;
+  box-shadow: 0 30px 90px rgba(15, 23, 42, 0.35);
 }
 
 .login-card h2 {
   margin: 0 0 16px;
   font-size: 34px;
+  color: #ffffff;
 }
 
-.subtitle {
-  color: #bfdbfe;
-  margin-top: 0;
-  margin-bottom: 30px;
+.login-card .subtitle {
+  color: #dbeafe;
+  margin: 0 0 20px;
+  font-size: 18px;
 }
 
 label {
   display: block;
-  margin-top: 18px;
-  margin-bottom: 8px;
+  margin-top: 14px;
+  margin-bottom: 9px;
   font-weight: bold;
+  color: #ffffff;
 }
 
 input {
   width: 100%;
-  padding: 15px;
+  padding: 13px;
   background: #020617;
-  color: #fff;
-  border: 1px solid rgba(147, 197, 253, 0.25);
-  border-radius: 12px;
+  color: #ffffff;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  border-radius: 14px;
   outline: none;
+  font-size: 16px;
 }
 
 input:focus {
-  border-color: #60a5fa;
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.18);
 }
 
 button {
-  margin-top: 22px;
+  margin-top: 18px;
   width: 100%;
-  padding: 15px;
-  background: #fff;
-  color: #000;
+  padding: 14px;
+  background: linear-gradient(135deg, #ffffff, #dbeafe);
+  color: #0f172a;
   border: none;
-  border-radius: 12px;
-  font-weight: bold;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 16px;
   cursor: pointer;
 }
 
 button:hover {
-  background: #93c5fd;
-}
-
-.error-message {
-  background: #1c0000;
-  color: #ffb3b3;
-  border: 1px solid #5a1e1e;
-  padding: 12px;
-  border-radius: 10px;
-}
-
-.success-message {
-  background: #041c0b;
-  color: #b7f7c5;
-  border: 1px solid #1f6f38;
-  padding: 12px;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #bfdbfe, #93c5fd);
 }
 
 .auth-links {
-  margin-top: 24px;
+  margin-top: 18px;
   text-align: center;
 }
 
 .auth-links a {
-  color: #93c5fd;
-  margin: 0 8px;
-  font-size: 15px;
+  color: #dbeafe;
+  margin: 0 10px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .auth-links span {
-  color: #64748b;
+  color: #93c5fd;
 }
 
 /* =========================
@@ -216,9 +211,25 @@ button:hover {
   color: #fff;
 }
 
-.user-pill a {
-  color: #93c5fd;
-  font-weight: bold;
+.logout-form {
+  margin: 0;
+}
+
+.logout-btn {
+  margin: 0;
+  width: auto;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #bfdbfe, #93c5fd);
+  color: #0f172a;
+  border: none;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(135deg, #93c5fd, #60a5fa);
 }
 
 .message-box {
@@ -230,11 +241,15 @@ button:hover {
   margin-bottom: 20px;
 }
 
-.dashboard-grid {
+.action-bar {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr;
-  gap: 22px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
   margin-bottom: 22px;
+}
+
+.action-bar button {
+  margin-top: 0;
 }
 
 .panel {
@@ -249,36 +264,8 @@ button:hover {
   margin-top: 0;
 }
 
-.large-panel {
-  grid-column: span 3;
-}
-
-.book-form {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr) 160px;
-  gap: 12px;
-}
-
-.panel input {
-  width: 100%;
-  margin: 0;
-}
-
-.book-form button {
-  margin-top: 0;
-}
-
-.button-row {
-  display: flex;
-  gap: 12px;
-}
-
-.button-row form {
-  flex: 1;
-}
-
-.table-panel {
-  margin-top: 0;
+.main-table {
+  min-height: 520px;
 }
 
 .section-heading {
@@ -301,7 +288,7 @@ table {
 th {
   background: rgba(30, 58, 138, 0.7);
   color: #dbeafe;
-  font-style: italic;
+  font-style: normal;
 }
 
 td {
@@ -330,6 +317,64 @@ th, td {
   border-radius: 12px;
   border: 1px dashed rgba(147, 197, 253, 0.3);
   color: #bfdbfe;
+}
+
+/* =========================
+   Modal Popups
+========================= */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.show-modal {
+  display: flex;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(147, 197, 253, 0.25);
+  border-radius: 24px;
+  padding: 34px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.65);
+  position: relative;
+}
+
+.modal-card h2 {
+  margin-top: 0;
+  font-style: normal;
+}
+
+.modal-card input {
+  margin-bottom: 14px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  font-size: 24px;
+  z-index: 10000;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
 }
 
 /* =========================
@@ -366,20 +411,8 @@ th, td {
     border-radius: 18px;
   }
 
-  .dashboard-grid {
+  .action-bar {
     grid-template-columns: 1fr;
-  }
-
-  .large-panel {
-    grid-column: span 1;
-  }
-
-  .book-form {
-    grid-template-columns: 1fr;
-  }
-
-  .book-form button {
-    margin-top: 14px;
   }
 
   .section-heading {

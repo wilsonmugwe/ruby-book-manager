@@ -17,7 +17,10 @@
       <div class="user-pill">
         <span>Logged in as</span>
         <strong><%= @role.upcase %></strong>
-        <a href="/logout">Logout</a>
+
+        <form action="/logout" method="get" class="logout-form">
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
       </div>
     </header>
 
@@ -25,55 +28,14 @@
       <div class="message-box"><%= @message %></div>
     <% end %>
 
-    <main class="dashboard-grid">
+    <div class="action-bar">
+      <button type="button" onclick="openModal('addModal')">Add Book</button>
+      <button type="button" onclick="openModal('searchModal')">Search</button>
+      <button type="button" onclick="openModal('filterModal')">Filter</button>
+      <button type="button" onclick="openModal('sortModal')">Sort</button>
+    </div>
 
-      <section class="panel large-panel">
-        <h2>Add Book</h2>
-
-        <form action="/add" method="post" class="book-form">
-          <input type="text" name="title" placeholder="Book title">
-          <input type="text" name="author" placeholder="Author">
-          <input type="text" name="genre" placeholder="Genre">
-          <input type="text" name="year" placeholder="Year">
-          <button type="submit">Add Book</button>
-        </form>
-      </section>
-
-      <section class="panel">
-        <h2>Search</h2>
-
-        <form action="/search" method="post">
-          <input type="text" name="keyword" placeholder="Search title, author, or genre">
-          <button type="submit">Search</button>
-        </form>
-      </section>
-
-      <section class="panel">
-        <h2>Filter by Genre</h2>
-
-        <form action="/filter" method="post">
-          <input type="text" name="genre" placeholder="Enter genre">
-          <button type="submit">Filter</button>
-        </form>
-      </section>
-
-      <section class="panel">
-        <h2>Sort Books</h2>
-
-        <div class="button-row">
-          <form action="/sort/title" method="post">
-            <button type="submit">Sort by Title</button>
-          </form>
-
-          <form action="/sort/year" method="post">
-            <button type="submit">Sort by Year</button>
-          </form>
-        </div>
-      </section>
-
-    </main>
-
-    <section class="panel table-panel">
+    <section class="panel table-panel main-table">
       <div class="section-heading">
         <h2>Book Collection</h2>
         <p><%= @books.length %> book(s) currently displayed</p>
@@ -116,5 +78,82 @@
     </section>
 
   </div>
+
+  <div id="addModal" class="modal">
+    <div class="modal-card">
+      <button type="button" class="close-btn" onclick="closeModal('addModal')">×</button>
+      <h2>Add Book</h2>
+
+      <form action="/add" method="post">
+        <input type="text" name="title" placeholder="Book title">
+        <input type="text" name="author" placeholder="Author">
+        <input type="text" name="genre" placeholder="Genre">
+        <input type="text" name="year" placeholder="Year">
+        <button type="submit">Add Book</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="searchModal" class="modal">
+    <div class="modal-card">
+      <button type="button" class="close-btn" onclick="closeModal('searchModal')">×</button>
+      <h2>Search Books</h2>
+
+      <form action="/search" method="post">
+        <input type="text" name="keyword" placeholder="Search title, author, or genre">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="filterModal" class="modal">
+    <div class="modal-card">
+      <button type="button" class="close-btn" onclick="closeModal('filterModal')">×</button>
+      <h2>Filter by Genre</h2>
+
+      <form action="/filter" method="post">
+        <input type="text" name="genre" placeholder="Enter genre">
+        <button type="submit">Filter</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="sortModal" class="modal">
+    <div class="modal-card">
+      <button type="button" class="close-btn" onclick="closeModal('sortModal')">×</button>
+      <h2>Sort Books</h2>
+
+      <form action="/sort/title" method="post">
+        <button type="submit">Sort by Title</button>
+      </form>
+
+      <form action="/sort/year" method="post">
+        <button type="submit">Sort by Year</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.add("show-modal");
+      }
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.remove("show-modal");
+      }
+    }
+
+    window.addEventListener("click", function(event) {
+      if (event.target.classList.contains("modal")) {
+        event.target.classList.remove("show-modal");
+      }
+    });
+  </script>
+
 </body>
 </html>
