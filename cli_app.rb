@@ -1,12 +1,36 @@
-require_relative "book"
-require_relative "book_manager"
+# ===============================================================
+# File Name: cli_app.rb
+# Class Name: CLIApp
+# Purpose:
+# This file provides a command-line interface version of the
+# Book Collection Manager application.
+# It allows users to interact with the same Book and BookManager
+# classes through terminal input/output instead of a web browser.
+# This demonstrates Ruby's flexibility in supporting both
+# console-based and web-based software interfaces.
+# ===============================================================
 
-# Command-line interface for the Ruby Book Collection Manager.
+require_relative "book"          # Imports the Book data model
+require_relative "book_manager"  # Imports the BookManager logic engine
+
+# ---------------------------------------------------------------
+# Class Name: CLIApp
+# Purpose:
+# Controls all terminal-based user interaction and menu navigation.
+# ---------------------------------------------------------------
 class CLIApp
+
+  # Constructor creates one BookManager object for all CLI actions
   def initialize
     @manager = BookManager.new
   end
 
+  # -------------------------------------------------------------
+  # Method Name: run
+  # Purpose:
+  # Displays the main CLI menu repeatedly until the user chooses
+  # to exit. Uses a loop and case statement to process commands.
+  # -------------------------------------------------------------
   def run
     loop do
       puts "\n===== CLI Book Collection Manager ====="
@@ -19,6 +43,7 @@ class CLIApp
 
       choice = gets.chomp
 
+      # Case control structure routes the user to the selected action
       case choice
       when "1"
         add_book
@@ -39,6 +64,13 @@ class CLIApp
 
   private
 
+  # -------------------------------------------------------------
+  # Method Name: add_book
+  # Purpose:
+  # Collects book information from terminal prompts, validates
+  # input fields, creates a Book object, and sends it to the
+  # BookManager for storage.
+  # -------------------------------------------------------------
   def add_book
     print "Enter book title: "
     title = gets.chomp
@@ -52,17 +84,25 @@ class CLIApp
     print "Enter publication year: "
     year = gets.chomp
 
+    # Validation prevents incomplete records from being created
     if title.empty? || author.empty? || genre.empty? || year.empty?
       puts "Error: all fields are required."
       return
     end
 
+    # Creates a new Book object and adds it to persistent storage
     book = Book.new(title, author, genre, year)
     @manager.add_book(book)
 
     puts "Book added successfully."
   end
 
+  # -------------------------------------------------------------
+  # Method Name: view_books
+  # Purpose:
+  # Displays every stored book currently available in the JSON
+  # collection file.
+  # -------------------------------------------------------------
   def view_books
     books = @manager.view_books
 
@@ -70,12 +110,20 @@ class CLIApp
       puts "No books found."
     else
       puts "\n--- Book Collection ---"
+
+      # each_with_index prints a numbered list for easier reading
       books.each_with_index do |book, index|
         puts "#{index + 1}. #{book.display}"
       end
     end
   end
 
+  # -------------------------------------------------------------
+  # Method Name: search_books
+  # Purpose:
+  # Accepts a keyword from the user and displays all matching
+  # books found through the BookManager search method.
+  # -------------------------------------------------------------
   def search_books
     print "Enter search keyword: "
     keyword = gets.chomp
@@ -86,12 +134,19 @@ class CLIApp
       puts "No matching books found."
     else
       puts "\n--- Search Results ---"
+
       results.each_with_index do |book, index|
         puts "#{index + 1}. #{book.display}"
       end
     end
   end
 
+  # -------------------------------------------------------------
+  # Method Name: delete_book
+  # Purpose:
+  # Allows the user to remove a selected book by entering its
+  # displayed number from the collection list.
+  # -------------------------------------------------------------
   def delete_book
     books = @manager.view_books
 
@@ -100,6 +155,7 @@ class CLIApp
       return
     end
 
+    # First displays all books so the user can choose correctly
     view_books
 
     print "Enter book number to delete: "
@@ -113,4 +169,9 @@ class CLIApp
   end
 end
 
+# ---------------------------------------------------------------
+# Program Execution Entry Point
+# Purpose:
+# Creates the CLIApp object and starts the terminal application.
+# ---------------------------------------------------------------
 CLIApp.new.run

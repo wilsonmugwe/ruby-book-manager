@@ -31,9 +31,9 @@ a:hover {
 .login-page {
   height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(3, 51, 106, 0.55), transparent 32%),
-    radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.30), transparent 40%),
-    linear-gradient(135deg, #dbeafe 0%, #042852 35%, #014fad 100%);
+    radial-gradient(circle at top left, rgba(1, 31, 65, 0.55), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(4, 59, 125, 0.3), transparent 40%),
+    linear-gradient(135deg, #172f4f 0%, #042852 35%, #043674 100%);
   padding: 25px 70px;
   display: flex;
   align-items: flex-start;

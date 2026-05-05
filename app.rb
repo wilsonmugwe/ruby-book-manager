@@ -1,14 +1,33 @@
-require "sinatra"
-require "json"
-require_relative "book"
-require_relative "book_manager"
+# ===============================================================
+# File Name: app.rb
+# Purpose:
+# This file is the main controller of the Book Collection Manager
+# web application. It uses the Sinatra framework to define routes,
+# manage sessions, authenticate users, process book actions, and
+# render the correct views.
+# ===============================================================
 
+require "sinatra"              # Lightweight Ruby web framework
+require "json"                 # Ruby library for reading/writing JSON files
+require_relative "book"        # Imports the Book model class
+require_relative "book_manager" # Imports the BookManager processing class
+
+# Enables session support so user login data can be stored temporarily
 enable :sessions
 
+# Creates one BookManager object used throughout the application
 manager = BookManager.new
 
+# Constant storing the user account file name
 USERS_FILE = "users.json"
 
+# ---------------------------------------------------------------
+# Method Name: load_users
+# Purpose:
+# Loads registered users from users.json.
+# If the file does not exist, a default administrator account is
+# created automatically so the system can be accessed initially.
+# ---------------------------------------------------------------
 def load_users
   unless File.exist?(USERS_FILE)
     default_users = [
@@ -25,10 +44,23 @@ def load_users
   JSON.parse(File.read(USERS_FILE))
 end
 
+# ---------------------------------------------------------------
+# Method Name: save_users
+# Purpose:
+# Saves the updated user list back into users.json using formatted
+# JSON output. This supports persistent user account storage.
+# ---------------------------------------------------------------
 def save_users(users)
   File.write(USERS_FILE, JSON.pretty_generate(users))
 end
 
+# ---------------------------------------------------------------
+# Method Name: historical_year_value
+# Purpose:
+# Converts year values into sortable integers.
+# This method allows the application to correctly sort books that
+# use historical year formats such as "500 BC".
+# ---------------------------------------------------------------
 def historical_year_value(year)
   year_text = year.to_s.strip.upcase
 
@@ -39,14 +71,31 @@ def historical_year_value(year)
   end
 end
 
+# ---------------------------------------------------------------
+# Route: GET /
+# Purpose:
+# Redirects users from the root URL to the login page.
+# ---------------------------------------------------------------
 get "/" do
   redirect "/login"
 end
 
+# ---------------------------------------------------------------
+# Route: GET /login
+# Purpose:
+# Displays the login page.
+# ---------------------------------------------------------------
 get "/login" do
   erb :login
 end
 
+# ---------------------------------------------------------------
+# Route: POST /login
+# Purpose:
+# Processes login form submissions by checking the entered username
+# and password against records stored in users.json.
+# If successful, the username and role are stored in the session.
+# ---------------------------------------------------------------
 post "/login" do
   username = params[:username].to_s.strip
   password = params[:password].to_s.strip
@@ -67,10 +116,22 @@ post "/login" do
   end
 end
 
+# ---------------------------------------------------------------
+# Route: GET /signup
+# Purpose:
+# Displays the user registration page.
+# ---------------------------------------------------------------
 get "/signup" do
   erb :signup
 end
 
+# ---------------------------------------------------------------
+# Route: POST /signup
+# Purpose:
+# Creates a new standard user account after validating that the
+# username and password are not empty and that the username has
+# not already been registered.
+# ---------------------------------------------------------------
 post "/signup" do
   username = params[:new_username].to_s.strip
   password = params[:new_password].to_s.strip
@@ -97,6 +158,12 @@ post "/signup" do
   end
 end
 
+# ---------------------------------------------------------------
+# Route: GET /dashboard
+# Purpose:
+# Displays the main dashboard after login.
+# Only books owned by the currently logged-in user are loaded.
+# ---------------------------------------------------------------
 get "/dashboard" do
   redirect "/login" unless session[:role]
 
@@ -107,6 +174,13 @@ get "/dashboard" do
   erb :dashboard
 end
 
+# ---------------------------------------------------------------
+# Route: POST /add
+# Purpose:
+# Handles the add-book form.
+# The input values are cleaned, validated, converted into a Book
+# object, and then passed to BookManager for storage.
+# ---------------------------------------------------------------
 post "/add" do
   redirect "/login" unless session[:role]
 
@@ -123,6 +197,12 @@ post "/add" do
   redirect "/dashboard"
 end
 
+# ---------------------------------------------------------------
+# Route: POST /search
+# Purpose:
+# Searches the logged-in user's book collection by title, author,
+# or genre and displays matching results on the dashboard.
+# ---------------------------------------------------------------
 post "/search" do
   redirect "/login" unless session[:role]
 
@@ -134,6 +214,12 @@ post "/search" do
   erb :dashboard
 end
 
+# ---------------------------------------------------------------
+# Route: POST /filter
+# Purpose:
+# Filters the logged-in user's book collection by genre.
+# The comparison is case-insensitive to improve usability.
+# ---------------------------------------------------------------
 post "/filter" do
   redirect "/login" unless session[:role]
 
@@ -151,6 +237,11 @@ post "/filter" do
   erb :dashboard
 end
 
+# ---------------------------------------------------------------
+# Route: POST /sort/title
+# Purpose:
+# Sorts the logged-in user's books alphabetically by title.
+# ---------------------------------------------------------------
 post "/sort/title" do
   redirect "/login" unless session[:role]
 
@@ -166,6 +257,13 @@ post "/sort/title" do
   erb :dashboard
 end
 
+# ---------------------------------------------------------------
+# Route: POST /sort/year
+# Purpose:
+# Sorts the logged-in user's books by year.
+# The historical_year_value method is used so BC dates are ordered
+# correctly before AD/current era dates.
+# ---------------------------------------------------------------
 post "/sort/year" do
   redirect "/login" unless session[:role]
 
@@ -181,6 +279,12 @@ post "/sort/year" do
   erb :dashboard
 end
 
+# ---------------------------------------------------------------
+# Route: POST /delete/:index
+# Purpose:
+# Deletes a selected book from the logged-in user's collection
+# using the index supplied from the dashboard.
+# ---------------------------------------------------------------
 post "/delete/:index" do
   redirect "/login" unless session[:role]
 
@@ -190,15 +294,32 @@ post "/delete/:index" do
   redirect "/dashboard"
 end
 
+# ---------------------------------------------------------------
+# Route: GET /logout
+# Purpose:
+# Clears the current session and returns the user to the login page.
+# ---------------------------------------------------------------
 get "/logout" do
   session.clear
   redirect "/login"
 end
 
+# ---------------------------------------------------------------
+# Route: GET /forgot
+# Purpose:
+# Displays the password reset page.
+# ---------------------------------------------------------------
 get "/forgot" do
   erb :forgot
 end
 
+# ---------------------------------------------------------------
+# Route: POST /forgot
+# Purpose:
+# Allows an existing user to reset their password after validation.
+# The system checks that all fields are completed, the username
+# exists, and both entered passwords match before saving changes.
+# ---------------------------------------------------------------
 post "/forgot" do
   username = params[:username].to_s.strip
   new_password = params[:new_password].to_s.strip
