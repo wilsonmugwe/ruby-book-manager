@@ -1,40 +1,247 @@
 [
-  { "title": "Rich Dad Poor Dad", "author": "Robert Kiyosaki", "genre": "Finance", "year": "1997", "owner": "admin" },
-  { "title": "The 48 Laws of Power", "author": "Robert Greene", "genre": "Strategy", "year": "1998", "owner": "admin" },
-  { "title": "The Psychology of Money", "author": "Morgan Housel", "genre": "Finance", "year": "2020", "owner": "admin" },
-  { "title": "Atomic Habits", "author": "James Clear", "genre": "Self Development", "year": "2018", "owner": "admin" },
-  { "title": "Deep Work", "author": "Cal Newport", "genre": "Productivity", "year": "2016", "owner": "admin" },
-  { "title": "The Intelligent Investor", "author": "Benjamin Graham", "genre": "Investment", "year": "1949", "owner": "admin" },
-  { "title": "Zero to One", "author": "Peter Thiel", "genre": "Business", "year": "2014", "owner": "admin" },
-  { "title": "Clean Code", "author": "Robert C. Martin", "genre": "Programming", "year": "2008", "owner": "admin" },
-  { "title": "The Pragmatic Programmer", "author": "Andrew Hunt", "genre": "Programming", "year": "1999", "owner": "admin" },
-  { "title": "Steve Jobs", "author": "Walter Isaacson", "genre": "Biography", "year": "2011", "owner": "admin" },
-  { "title": "The Lean Startup", "author": "Eric Ries", "genre": "Entrepreneurship", "year": "2011", "owner": "admin" },
-  { "title": "Thinking, Fast and Slow", "author": "Daniel Kahneman", "genre": "Psychology", "year": "2011", "owner": "admin" },
-
-  { "title": "Harry Potter and the Sorcerer's Stone", "author": "J.K. Rowling", "genre": "Fantasy", "year": "1997", "owner": "user" },
-  { "title": "The Hobbit", "author": "J.R.R. Tolkien", "genre": "Fantasy", "year": "1937", "owner": "user" },
-  { "title": "The Fault in Our Stars", "author": "John Green", "genre": "Romance", "year": "2012", "owner": "user" },
-  { "title": "Gone Girl", "author": "Gillian Flynn", "genre": "Mystery", "year": "2012", "owner": "user" },
-  { "title": "The Da Vinci Code", "author": "Dan Brown", "genre": "Mystery", "year": "2003", "owner": "user" },
-  { "title": "The Midnight Library", "author": "Matt Haig", "genre": "Fiction", "year": "2020", "owner": "user" },
-  { "title": "Dune", "author": "Frank Herbert", "genre": "Science Fiction", "year": "1965", "owner": "user" },
-  { "title": "The Silent Patient", "author": "Alex Michaelides", "genre": "Thriller", "year": "2019", "owner": "user" },
-  { "title": "Frankenstein", "author": "Mary Shelley", "genre": "Horror", "year": "1818", "owner": "user" },
-  { "title": "Dracula", "author": "Bram Stoker", "genre": "Horror", "year": "1897", "owner": "user" },
-  { "title": "Pride and Prejudice", "author": "Jane Austen", "genre": "Romance", "year": "1813", "owner": "user" },
-  { "title": "1984", "author": "George Orwell", "genre": "Dystopian", "year": "1949", "owner": "user" },
-
-  { "title": "Can't Hurt Me", "author": "David Goggins", "genre": "Motivation", "year": "2018", "owner": "wilson" },
-  { "title": "The Art of War", "author": "Sun Tzu", "genre": "Philosophy", "year": "500 BC", "owner": "wilson" },
-  { "title": "Meditations", "author": "Marcus Aurelius", "genre": "Philosophy", "year": "180", "owner": "wilson" },
-  { "title": "Start With Why", "author": "Simon Sinek", "genre": "Leadership", "year": "2009", "owner": "wilson" },
-  { "title": "Hooked", "author": "Nir Eyal", "genre": "Business", "year": "2014", "owner": "wilson" },
-  { "title": "Cracking the Coding Interview", "author": "Gayle McDowell", "genre": "Programming", "year": "2015", "owner": "wilson" },
-  { "title": "Flutter in Action", "author": "Eric Windmill", "genre": "Mobile Development", "year": "2020", "owner": "wilson" },
-  { "title": "The Clean Coder", "author": "Robert C. Martin", "genre": "Programming", "year": "2011", "owner": "wilson" },
-  { "title": "Shoe Dog", "author": "Phil Knight", "genre": "Entrepreneurship", "year": "2016", "owner": "wilson" },
-  { "title": "Never Split the Difference", "author": "Chris Voss", "genre": "Negotiation", "year": "2016", "owner": "wilson" },
-  { "title": "Man's Search for Meaning", "author": "Viktor Frankl", "genre": "Philosophy", "year": "1946", "owner": "wilson" },
-  { "title": "Ikigai", "author": "Hector Garcia", "genre": "Lifestyle", "year": "2016", "owner": "wilson" }
+  {
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert Kiyosaki",
+    "genre": "Finance",
+    "year": "1997",
+    "owner": "admin"
+  },
+  {
+    "title": "Deep Work",
+    "author": "Cal Newport",
+    "genre": "Productivity",
+    "year": "2016",
+    "owner": "admin"
+  },
+  {
+    "title": "The Intelligent Investor",
+    "author": "Benjamin Graham",
+    "genre": "Investment",
+    "year": "1949",
+    "owner": "admin"
+  },
+  {
+    "title": "Zero to One",
+    "author": "Peter Thiel",
+    "genre": "Business",
+    "year": "2014",
+    "owner": "admin"
+  },
+  {
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "genre": "Programming",
+    "year": "2008",
+    "owner": "admin"
+  },
+  {
+    "title": "The Pragmatic Programmer",
+    "author": "Andrew Hunt",
+    "genre": "Programming",
+    "year": "1999",
+    "owner": "admin"
+  },
+  {
+    "title": "Steve Jobs",
+    "author": "Walter Isaacson",
+    "genre": "Biography",
+    "year": "2011",
+    "owner": "admin"
+  },
+  {
+    "title": "The Lean Startup",
+    "author": "Eric Ries",
+    "genre": "Entrepreneurship",
+    "year": "2011",
+    "owner": "admin"
+  },
+  {
+    "title": "Thinking, Fast and Slow",
+    "author": "Daniel Kahneman",
+    "genre": "Psychology",
+    "year": "2011",
+    "owner": "admin"
+  },
+  {
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "genre": "Fantasy",
+    "year": "1997",
+    "owner": "user"
+  },
+  {
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "genre": "Fantasy",
+    "year": "1937",
+    "owner": "user"
+  },
+  {
+    "title": "The Fault in Our Stars",
+    "author": "John Green",
+    "genre": "Romance",
+    "year": "2012",
+    "owner": "user"
+  },
+  {
+    "title": "Gone Girl",
+    "author": "Gillian Flynn",
+    "genre": "Mystery",
+    "year": "2012",
+    "owner": "user"
+  },
+  {
+    "title": "The Da Vinci Code",
+    "author": "Dan Brown",
+    "genre": "Mystery",
+    "year": "2003",
+    "owner": "user"
+  },
+  {
+    "title": "The Midnight Library",
+    "author": "Matt Haig",
+    "genre": "Fiction",
+    "year": "2020",
+    "owner": "user"
+  },
+  {
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "genre": "Science Fiction",
+    "year": "1965",
+    "owner": "user"
+  },
+  {
+    "title": "The Silent Patient",
+    "author": "Alex Michaelides",
+    "genre": "Thriller",
+    "year": "2019",
+    "owner": "user"
+  },
+  {
+    "title": "Frankenstein",
+    "author": "Mary Shelley",
+    "genre": "Horror",
+    "year": "1818",
+    "owner": "user"
+  },
+  {
+    "title": "Dracula",
+    "author": "Bram Stoker",
+    "genre": "Horror",
+    "year": "1897",
+    "owner": "user"
+  },
+  {
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "genre": "Romance",
+    "year": "1813",
+    "owner": "user"
+  },
+  {
+    "title": "1984",
+    "author": "George Orwell",
+    "genre": "Dystopian",
+    "year": "1949",
+    "owner": "user"
+  },
+  {
+    "title": "Can't Hurt Me",
+    "author": "David Goggins",
+    "genre": "Motivation",
+    "year": "2018",
+    "owner": "wilson"
+  },
+  {
+    "title": "The Art of War",
+    "author": "Sun Tzu",
+    "genre": "Philosophy",
+    "year": "500 BC",
+    "owner": "wilson"
+  },
+  {
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "genre": "Philosophy",
+    "year": "180",
+    "owner": "wilson"
+  },
+  {
+    "title": "Start With Why",
+    "author": "Simon Sinek",
+    "genre": "Leadership",
+    "year": "2009",
+    "owner": "wilson"
+  },
+  {
+    "title": "Hooked",
+    "author": "Nir Eyal",
+    "genre": "Business",
+    "year": "2014",
+    "owner": "wilson"
+  },
+  {
+    "title": "Cracking the Coding Interview",
+    "author": "Gayle McDowell",
+    "genre": "Programming",
+    "year": "2015",
+    "owner": "wilson"
+  },
+  {
+    "title": "Flutter in Action",
+    "author": "Eric Windmill",
+    "genre": "Mobile Development",
+    "year": "2020",
+    "owner": "wilson"
+  },
+  {
+    "title": "The Clean Coder",
+    "author": "Robert C. Martin",
+    "genre": "Programming",
+    "year": "2011",
+    "owner": "wilson"
+  },
+  {
+    "title": "Shoe Dog",
+    "author": "Phil Knight",
+    "genre": "Entrepreneurship",
+    "year": "2016",
+    "owner": "wilson"
+  },
+  {
+    "title": "Never Split the Difference",
+    "author": "Chris Voss",
+    "genre": "Negotiation",
+    "year": "2016",
+    "owner": "wilson"
+  },
+  {
+    "title": "Man's Search for Meaning",
+    "author": "Viktor Frankl",
+    "genre": "Philosophy",
+    "year": "1946",
+    "owner": "wilson"
+  },
+  {
+    "title": "Ikigai",
+    "author": "Hector Garcia",
+    "genre": "Lifestyle",
+    "year": "2016",
+    "owner": "wilson"
+  },
+  {
+    "title": "Digital Minimalism",
+    "author": "Cal Newport",
+    "genre": "Technology",
+    "year": "2019",
+    "owner": "admin"
+  },
+  {
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "genre": "Self Development",
+    "year": "2018",
+    "owner": "admin"
+  }
 ]

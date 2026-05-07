@@ -4,46 +4,40 @@
 # Purpose:
 # This file provides a command-line interface version of the
 # Book Collection Manager application.
-# It allows users to interact with the same Book and BookManager
-# classes through terminal input/output instead of a web browser.
-# This demonstrates Ruby's flexibility in supporting both
-# console-based and web-based software interfaces.
+# It uses the same Book and BookManager classes as the web version,
+# demonstrating Ruby's flexibility across both CLI and web systems.
 # ===============================================================
 
-require_relative "book"          # Imports the Book data model
-require_relative "book_manager"  # Imports the BookManager logic engine
+require_relative "book"
+require_relative "book_manager"
 
-# ---------------------------------------------------------------
-# Class Name: CLIApp
-# Purpose:
-# Controls all terminal-based user interaction and menu navigation.
-# ---------------------------------------------------------------
 class CLIApp
-
-  # Constructor creates one BookManager object for all CLI actions
   def initialize
     @manager = BookManager.new
+    @username = nil
   end
 
   # -------------------------------------------------------------
   # Method Name: run
   # Purpose:
-  # Displays the main CLI menu repeatedly until the user chooses
-  # to exit. Uses a loop and case statement to process commands.
+  # Starts the CLI program by asking for a username, then repeatedly
+  # displays the menu until the user chooses to exit.
   # -------------------------------------------------------------
   def run
+    login_cli_user
+
     loop do
       puts "\n===== CLI Book Collection Manager ====="
+      puts "Logged in as: #{@username}"
       puts "1. Add Book"
-      puts "2. View All Books"
-      puts "3. Search Book"
-      puts "4. Delete Book"
-      puts "5. Exit to Main Program"
+      puts "2. View My Books"
+      puts "3. Search My Books"
+      puts "4. Delete My Book"
+      puts "5. Exit CLI"
       print "Choose an option: "
 
       choice = gets.chomp
 
-      # Case control structure routes the user to the selected action
       case choice
       when "1"
         add_book
@@ -65,33 +59,51 @@ class CLIApp
   private
 
   # -------------------------------------------------------------
+  # Method Name: login_cli_user
+  # Purpose:
+  # Collects a username for the CLI session.
+  # This username becomes the owner of all books added through CLI.
+  # -------------------------------------------------------------
+  def login_cli_user
+    loop do
+      print "Enter your username to start CLI session: "
+      input = gets.chomp.strip
+
+      if input.empty?
+        puts "Username cannot be empty."
+      else
+        @username = input
+        puts "CLI session started for #{@username}."
+        break
+      end
+    end
+  end
+
+  # -------------------------------------------------------------
   # Method Name: add_book
   # Purpose:
-  # Collects book information from terminal prompts, validates
-  # input fields, creates a Book object, and sends it to the
-  # BookManager for storage.
+  # Collects book details, validates input, creates a Book object,
+  # assigns the current CLI username as owner, and saves the record.
   # -------------------------------------------------------------
   def add_book
     print "Enter book title: "
-    title = gets.chomp
+    title = gets.chomp.strip
 
     print "Enter author: "
-    author = gets.chomp
+    author = gets.chomp.strip
 
     print "Enter genre: "
-    genre = gets.chomp
+    genre = gets.chomp.strip
 
     print "Enter publication year: "
-    year = gets.chomp
+    year = gets.chomp.strip
 
-    # Validation prevents incomplete records from being created
     if title.empty? || author.empty? || genre.empty? || year.empty?
       puts "Error: all fields are required."
       return
     end
 
-    # Creates a new Book object and adds it to persistent storage
-    book = Book.new(title, author, genre, year)
+    book = Book.new(title, author, genre, year, @username)
     @manager.add_book(book)
 
     puts "Book added successfully."
@@ -100,18 +112,16 @@ class CLIApp
   # -------------------------------------------------------------
   # Method Name: view_books
   # Purpose:
-  # Displays every stored book currently available in the JSON
-  # collection file.
+  # Displays only the books owned by the current CLI user.
   # -------------------------------------------------------------
   def view_books
-    books = @manager.view_books
+    books = @manager.books_for_user(@username)
 
     if books.empty?
-      puts "No books found."
+      puts "No books found for #{@username}."
     else
-      puts "\n--- Book Collection ---"
+      puts "\n--- #{@username}'s Book Collection ---"
 
-      # each_with_index prints a numbered list for easier reading
       books.each_with_index do |book, index|
         puts "#{index + 1}. #{book.display}"
       end
@@ -121,14 +131,14 @@ class CLIApp
   # -------------------------------------------------------------
   # Method Name: search_books
   # Purpose:
-  # Accepts a keyword from the user and displays all matching
-  # books found through the BookManager search method.
+  # Searches only the current user's books using BookManager's
+  # username-aware search method.
   # -------------------------------------------------------------
   def search_books
     print "Enter search keyword: "
-    keyword = gets.chomp
+    keyword = gets.chomp.strip
 
-    results = @manager.search_books(keyword)
+    results = @manager.search_books(keyword, @username)
 
     if results.empty?
       puts "No matching books found."
@@ -144,24 +154,22 @@ class CLIApp
   # -------------------------------------------------------------
   # Method Name: delete_book
   # Purpose:
-  # Allows the user to remove a selected book by entering its
-  # displayed number from the collection list.
+  # Deletes a selected book belonging only to the current CLI user.
   # -------------------------------------------------------------
   def delete_book
-    books = @manager.view_books
+    books = @manager.books_for_user(@username)
 
     if books.empty?
       puts "No books to delete."
       return
     end
 
-    # First displays all books so the user can choose correctly
     view_books
 
     print "Enter book number to delete: "
     number = gets.chomp.to_i
 
-    if @manager.delete_book(number - 1)
+    if @manager.delete_user_book(number - 1, @username)
       puts "Book deleted successfully."
     else
       puts "Invalid book number."
@@ -169,9 +177,4 @@ class CLIApp
   end
 end
 
-# ---------------------------------------------------------------
-# Program Execution Entry Point
-# Purpose:
-# Creates the CLIApp object and starts the terminal application.
-# ---------------------------------------------------------------
 CLIApp.new.run
